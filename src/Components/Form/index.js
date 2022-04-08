@@ -14,7 +14,7 @@ export default function Form() {
     const [numero, setNumero] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState(null);
-    const [comentario, setComentario] = useState(null);
+    const [descricao, setDescricao] = useState(null);
 
     function validar() {
         if (matricula != null && selectedValue != "default" && nome != null) {
@@ -25,8 +25,9 @@ export default function Form() {
     }
     function confirmarEnvio() {
         setIsOpen(false)
-        setMatricula(null)
         setNome(null)
+        setMatricula(null)
+        setRua(null)
         setSelectedValue("default")
     }
 
@@ -49,31 +50,35 @@ export default function Form() {
                     <Picker.Item label="Valença" value="valença" />
                     <Picker.Item label="Vassouras" value="vassouras" />
                 </Picker>
-                <Text style={estilos.label} >Bairro</Text>
+                <Text style={estilos.label} >Informe seu Nome:</Text>
                 <TextInput
                     style={estilos.input}
-                    keyboardType="text"
+                    onChangeText={setNome}
+                    value={nome}
+                />
+                <Text style={estilos.label} >Informe o Bairro:</Text>
+                <TextInput
+                    style={estilos.input}
                     onChangeText={setBairro}
                     value={bairro}
                 />
-                <Text style={estilos.label}>Informe a Rua</Text>
+                <Text style={estilos.label}>Informe a Rua: </Text>
                 <TextInput
                     onChangeText={setRua}
                     value={rua}
                     style={estilos.input} />
-                
-                <Text style={estilos.label} >Numero</Text>
+                <Text style={estilos.label}>Informe o Número: </Text>
                 <TextInput
-                    style={estilos.input}
-                    keyboardType="numeric"
                     onChangeText={setNumero}
+                    keyboardType="numeric"
                     value={numero}
-                />
-                <label>Comentario</label>
+                    style={estilos.input} />
+                <Text style={estilos.label}>Informe a Descricao: </Text>
                 <TextInput
-                    multiline={true}
-                    numberOfLines={4}
-                    value={comentario} />
+                    onChangeText={setDescricao}
+                    value={descricao}
+                    style={estilos.input} />
+
                 <TouchableOpacity style={estilos.botao}
                     onPress={() => validar()} >
                     <Text style={estilos.botaoTexto}>
@@ -85,7 +90,7 @@ export default function Form() {
             <Modal transparent={true} visible={isOpen}>
                 <TakePicture
                     matricula={matricula}
-                    cidade={selectedValue}
+                    selectedValue={selectedValue}
                     confirmarEnvio={confirmarEnvio}
 
                 />
