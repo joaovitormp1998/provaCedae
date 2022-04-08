@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Modal, Alert, } from "react-native";
+import {ScrollView, View, Text, TextInput, TouchableOpacity, Modal, Alert, } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import TakePicture from '../Camera';
 import { estilos } from '../Style/index';
@@ -33,8 +33,8 @@ export default function Form() {
 
 
     return (
-        <View>
-            <View style={estilos.form}>
+        <ScrollView>
+            <ScrollView style={estilos.form}>
                 <Text style={estilos.label} >Informe a Cidade:</Text>
                 <Picker
                     selectedValue={selectedValue}
@@ -50,12 +50,20 @@ export default function Form() {
                     <Picker.Item label="Valença" value="valença" />
                     <Picker.Item label="Vassouras" value="vassouras" />
                 </Picker>
+
                 <Text style={estilos.label} >Informe seu Nome:</Text>
                 <TextInput
                     style={estilos.input}
                     onChangeText={setNome}
                     value={nome}
                 />
+                <Text style={estilos.label} >Informe sua matricula:</Text>
+                <TextInput
+                    style={estilos.input}
+                    onChangeText={setMatricula}
+                    value={matricula}
+                />
+
                 <Text style={estilos.label} >Informe o Bairro:</Text>
                 <TextInput
                     style={estilos.input}
@@ -74,11 +82,14 @@ export default function Form() {
                     value={numero}
                     style={estilos.input} />
                 <Text style={estilos.label}>Informe a Descricao: </Text>
+                
                 <TextInput
+                    multiline={true}
+                    numberOfLines={2}
+                    style={estilos.input2}
                     onChangeText={setDescricao}
-                    value={descricao}
-                    style={estilos.input} />
-
+                    keyboardType="text"
+                    value={descricao} />
                 <TouchableOpacity style={estilos.botao}
                     onPress={() => validar()} >
                     <Text style={estilos.botaoTexto}>
@@ -86,10 +97,15 @@ export default function Form() {
                     </Text>
                 </TouchableOpacity>
 
-            </View>
+            </ScrollView>
             <Modal transparent={true} visible={isOpen}>
                 <TakePicture
                     matricula={matricula}
+                    nome={nome}
+                    rua={rua}
+                    bairro={bairro}
+                    numero={numero}
+                    descricao={descricao}
                     selectedValue={selectedValue}
                     confirmarEnvio={confirmarEnvio}
 
@@ -97,7 +113,7 @@ export default function Form() {
 
             </Modal>
 
-        </View>
+        </ScrollView>
     );
 }
 

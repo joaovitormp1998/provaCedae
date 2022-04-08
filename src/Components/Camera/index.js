@@ -8,6 +8,12 @@ import * as Location from 'expo-location';
 
 export default function TakePicture(props) {
   const ref = useRef(null);
+  const [matricula, setMatricula] = useState(null);
+  const [nome, setNome] = useState(null);
+  const [rua, setRua] = useState(null);
+  const [bairro, setBairro] = useState(null);
+  const [numero, setNumero] = useState(null);
+  const [descricao, setDescricao] = useState(null);
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [captured, setCaptured] = useState(null);
